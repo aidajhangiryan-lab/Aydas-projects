@@ -1,0 +1,135 @@
+/* Reset & font */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #f5a6f1, #ffd6e8, #a8c0ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Calculator container */
+.calculator {
+  background: rgba(255, 255, 255, 0.2); /* slightly more opaque */
+  backdrop-filter: blur(12px);
+  border-radius: 25px;
+  padding: 25px;
+  width: 360px;
+  box-shadow: 0 8px 40px rgba(255, 255, 255, 0.25), 0 0 25px rgba(255, 182, 193, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Display area */
+.display {
+  background: rgba(255, 255, 255, 0.25); /* more visible */
+  border-radius: 20px;
+  padding: 20px;
+  font-size: 2.5rem;
+  text-align: right;
+  color: #1b1b1b; /* dark text for visibility */
+  margin-bottom: 25px;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.15);
+  backdrop-filter: blur(12px);
+  overflow-x: auto;
+     min-height: 80px;
+  word-wrap: break-word;
+  
+}
+
+/* Buttons grid */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+/* Glassy buttons */
+.buttons button {
+  background: rgba(255,255,255,0.35); /* more visible */
+  border-radius: 15px;
+  border: 1px solid rgba(255,255,255,0.4);
+  padding: 18px;
+  font-size: 1.4rem;
+  color: #1b1b1b; /* dark text */
+  cursor: pointer;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Hover & active effects */
+.buttons button:hover {
+  background: rgba(255,255,255,0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(255, 255, 255, 0.35);
+}
+
+.buttons button:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
+}
+
+/* Operator buttons with pink gradients */
+.buttons button[data-action] {
+  background: linear-gradient(135deg, #ff92c2, #ff61a6);
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 8px 20px rgba(255, 97, 166, 0.4);
+}
+
+.buttons button[data-action]:hover {
+  background: linear-gradient(135deg, #ff61a6, #ff2b85);
+}
+
+/* Equal button - pinkish gradient instead of green */
+#equal {
+  background: linear-gradient(135deg, #ffb3e0, #ff69c1);
+  color: #1b1b1b;
+  font-weight: bold;
+}
+
+#equal:hover {
+  background: linear-gradient(135deg, #ff69c1, #ff2b85);
+}
+
+/* Memory/history buttons */
+.memory-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.memory-buttons button {
+  flex: 1;
+  padding: 10px;
+  font-size: 0.9rem;
+  background: rgba(255,255,255,0.35); /* more visible */
+  color: #1b1b1b;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.4);
+  backdrop-filter: blur(8px);
+}
+
+.memory-buttons button:hover {
+  background: rgba(255,255,255,0.55);
+}
+
+/* History box */
+.history {
+  margin-top: 15px;
+  background: rgba(255,255,255,0.25);
+  padding: 10px;
+  border-radius: 15px;
+  max-height: 120px;
+  overflow-y: auto;
+  color: #1b1b1b;
+  font-size: 0.9rem;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
