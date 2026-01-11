@@ -11,6 +11,7 @@ buttons.forEach(btn => {
         if (!btn.dataset.value && !btn.dataset.action) return;
         addDigit(btn.dataset.value || btn.dataset.action);
 
+        btn.blur();
     });
 });
 
@@ -22,10 +23,10 @@ equal.addEventListener("click", () => {
     }
 })
 
-//if key "delate " pressed
-const delate = document.getElementById("delate")
-delate.addEventListener("click", () => {
-    delateScreen()
+//if key "delete " pressed
+const deletebtn = document.getElementById("delete")
+deletebtn.addEventListener("click", () => {
+    deleteScreen()
 })
 
 
@@ -45,52 +46,65 @@ document.addEventListener("keydown", event => {
 
     //if backspace pressed
     if (event.key == "Backspace") {
-        delateScreen();
+        deleteScreen();
     }
 })
 
 //my functions
-function delateScreen() {
+
+function deleteScreen() {
     text.innerText = ""
     arr.length = 0;
 }
 
 function addDigit(key) {
-    //ete irar hetevic 0 a poxuma 0n tvi
-    //ete zangvacy datarka u nemucvox nishy tiva-> push
-    //ete verji nishy tiva u nermucvox nishy tiva  && ete verji tivy 0a u nermucvox tivy 0 chi -> +=
-    //ete vreji nishy tiva u nermucvox nishy nshana -> push
-    //ete verji nishy nshana u nermucvox nishy tiva u 0 chi  -> push
-    let last = arr.at(-1);
-    let numKey = Number(key);
-
-    if (last === "0" && "0123456789".includes(key)) {
-        arr[arr.length - 1] = key;
-        text.innerText = text.innerText.slice(0, -1) + key;
+    const last = arr.at(-1);
+    const numKey = Number(key);
+    const lastnum = Number(last)
+     const isNumber = function (input){
+        return Number.isFinite(input)
     }
-    else if (arr.length === 0 && Number.isFinite(numKey)) {
+
+    const addFromRigth = function(){
         arr.push(key);
         text.innerText += key;
     }
-    else if (Number.isFinite(Number(last)) && Number.isFinite(numKey)) {
+
+    const concatToLastNum = function(){
         arr[arr.length - 1] += key;
         text.innerText += key;
     }
-    else if (Number.isFinite(Number(last)) && !Number.isFinite(numKey)) {
-        arr.push(key);
-        text.innerText += key;
-    }
-    else if (!Number.isFinite(Number(last)) && Number.isFinite(numKey)) {
-        arr.push(key);
-        text.innerText += key;
+
+
+    const changeDigit = function(){
+        arr[arr.length - 1] = key;
+        text.innerText = text.innerText.slice(0, -1) + key;
     }
 
-}
+
+    const checkIfzeroAfterZero = last === "0" && "0123456789".includes(key)
+    const checkIfArrIsEmpty = arr.length === 0 && isNumber(numKey)
+    const checkTypingNums = isNumber(lastnum) && isNumber(numKey)
+    const checkIfOperator = isNumber(lastnum) && !isNumber(numKey)
+    const checkNumAfterOperator = !isNumber(lastnum) && isNumber(numKey)
+
+    if (checkIfzeroAfterZero) {
+        changeDigit()
+    }
+    else if (checkIfArrIsEmpty || checkIfOperator || checkNumAfterOperator) {
+        addFromRigth()
+    }
+    else if (checkTypingNums) {
+       concatToLastNum()
+    }
+    }
+
+
+
+
 
 function calculate() {
     if (arr.length == 0) return;
-
-
 
     // *, /
     for (let i = 0; i < arr.length; i++) {
